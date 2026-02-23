@@ -1,13 +1,451 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plant Tracker</title>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plant Tracker – 8 cards</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-</head>
-<body>
-    
-</body>
+    <style>
+      /* quick transition for filter visibility */
+      .card {
+        transition: opacity 0.2s;
+      }
+    </style>
+  </head>
+  <body class="bg-stone-50">
+    <header class="w-[80%] mx-auto pt-6">
+      <h1 class="text-6xl font-bold text-green-600 mb-4">Plant Tracker</h1>
+      <!-- stats cards -->
+      <div class="grid grid-cols-3 gap-8">
+        <div class="bg-amber-200 p-4 rounded-2xl text-2xl shadow-sm">
+          <p id="total">0</p>
+          <p>Total</p>
+        </div>
+        <div class="bg-green-200 p-4 rounded-2xl text-2xl shadow-sm">
+          <p id="thrivingCount">0</p>
+          <p>Thrive</p>
+        </div>
+        <div class="bg-red-200 p-4 rounded-2xl text-2xl shadow-sm">
+          <p id="struggling">0</p>
+          <p>Struggling</p>
+        </div>
+      </div>
+    </header>
+
+    <hr class="my-5 w-[80%] mx-auto border-gray-300" />
+
+    <main class="w-[80%] mx-auto pb-12">
+      <!-- filter buttons -->
+      <div class="mb-6 flex gap-3">
+        <button
+          class="filter-btn bg-black text-white px-6 py-2 rounded-full text-sm font-medium shadow-sm"
+          data-filter="all"
+          id="all-filter-btn"
+        >
+          All
+        </button>
+        <button
+          class="filter-btn bg-gray-200 px-6 py-2 rounded-full text-sm font-medium hover:bg-gray-300"
+          data-filter="thriving"
+          id="thriving-filter-btn"
+        >
+          Thriving
+        </button>
+        <button
+          class="filter-btn bg-gray-200 px-6 py-2 rounded-full text-sm font-medium hover:bg-gray-300"
+          data-filter="struggling"
+          id="struggling-filter-btn"
+        >
+          Struggling
+        </button>
+      </div>
+
+      <!-- cards container (8 cards) -->
+      <section id="all-cards" class="space-y-4">
+        <!-- card 01 – Monstera -->
+        <div
+          class="card flex justify-between items-start border border-gray-200 p-6 rounded-2xl bg-white shadow-sm"
+          data-status="neutral"
+        >
+          <div class="space-y-3">
+            <div>
+              <p class="plant-name text-3xl font-semibold text-gray-800">
+                Monstera deliciosa
+              </p>
+              <p class="latin-name text-gray-500 italic">Monstera deliciosa</p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <p class="light bg-gray-100 px-4 py-1.5 rounded-full text-sm">
+                Bright indirect
+              </p>
+              <p class="water bg-gray-100 px-4 py-1.5 rounded-full text-sm">
+                Water weekly
+              </p>
+            </div>
+            <p class="status text-sm text-gray-500" data-field="status">
+              😐 Not applicable
+            </p>
+            <p class="notes text-gray-700 max-w-md">
+              New leaf unfurling by the east window ✨
+            </p>
+            <div class="flex gap-3 pt-1">
+              <button
+                class="thriving-btn bg-green-100 hover:bg-green-200 text-green-800 px-5 py-2 rounded-lg text-sm font-medium transition"
+              >
+                Thrive
+              </button>
+              <button
+                class="struggling-btn bg-red-100 hover:bg-red-200 text-red-800 px-5 py-2 rounded-lg text-sm font-medium transition"
+              >
+                Struggle
+              </button>
+            </div>
+          </div>
+          <div>
+            <button
+              class="delete-btn bg-red-100 text-red-700 hover:bg-red-200 px-5 py-2 rounded-lg text-sm font-medium transition"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+
+        <!-- card 02 – Snake plant -->
+        <div
+          class="card flex justify-between items-start border border-gray-200 p-6 rounded-2xl bg-white shadow-sm"
+          data-status="thriving"
+        >
+          <div class="space-y-3">
+            <div>
+              <p class="plant-name text-3xl font-semibold text-gray-800">
+                Snake plant
+              </p>
+              <p class="latin-name text-gray-500 italic">
+                Dracaena trifasciata
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <p class="light bg-gray-100 px-4 py-1.5 rounded-full text-sm">
+                Low light
+              </p>
+              <p class="water bg-gray-100 px-4 py-1.5 rounded-full text-sm">
+                Every 3 weeks
+              </p>
+            </div>
+            <p class="status text-sm text-gray-500" data-field="status">
+              💚 Thriving – new pup
+            </p>
+            <p class="notes text-gray-700">
+              Small shoot emerging, pot feels light
+            </p>
+            <div class="flex gap-3 pt-1">
+              <button
+                class="thriving-btn bg-green-100 hover:bg-green-200 text-green-800 px-5 py-2 rounded-lg text-sm font-medium"
+              >
+                Thrive
+              </button>
+              <button
+                class="struggling-btn bg-red-100 hover:bg-red-200 text-red-800 px-5 py-2 rounded-lg text-sm font-medium"
+              >
+                Struggle
+              </button>
+            </div>
+          </div>
+          <div>
+            <button
+              class="delete-btn bg-red-100 text-red-700 hover:bg-red-200 px-5 py-2 rounded-lg text-sm"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+
+        <!-- card 03 – Fiddle leaf fig (struggling) -->
+        <div
+          class="card flex justify-between items-start border border-gray-200 p-6 rounded-2xl bg-white shadow-sm"
+          data-status="struggling"
+        >
+          <div class="space-y-3">
+            <div>
+              <p class="plant-name text-3xl font-semibold text-gray-800">
+                Fiddle leaf fig
+              </p>
+              <p class="latin-name text-gray-500 italic">Ficus lyrata</p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <p class="light bg-gray-100 px-4 py-1.5 rounded-full text-sm">
+                Bright light
+              </p>
+              <p class="water bg-gray-100 px-4 py-1.5 rounded-full text-sm">
+                Once a week
+              </p>
+            </div>
+            <p class="status text-sm text-gray-500" data-field="status">
+              🍂 Struggling – brown spots
+            </p>
+            <p class="notes text-gray-700">
+              Lower leaves dropping, check watering
+            </p>
+            <div class="flex gap-3 pt-1">
+              <button
+                class="thriving-btn bg-green-100 hover:bg-green-200 text-green-800 px-5 py-2 rounded-lg text-sm"
+              >
+                Thrive
+              </button>
+              <button
+                class="struggling-btn bg-red-100 hover:bg-red-200 text-red-800 px-5 py-2 rounded-lg text-sm"
+              >
+                Struggle
+              </button>
+            </div>
+          </div>
+          <div>
+            <button
+              class="delete-btn bg-red-100 text-red-700 hover:bg-red-200 px-5 py-2 rounded-lg text-sm"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+
+        <!-- card 04 – Pothos (thriving) -->
+        <div
+          class="card flex justify-between items-start border border-gray-200 p-6 rounded-2xl bg-white shadow-sm"
+          data-status="thriving"
+        >
+          <div class="space-y-3">
+            <div>
+              <p class="plant-name text-3xl font-semibold text-gray-800">
+                Golden pothos
+              </p>
+              <p class="latin-name text-gray-500 italic">Epipremnum aureum</p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <p class="light bg-gray-100 px-4 py-1.5 rounded-full text-sm">
+                Low to bright
+              </p>
+              <p class="water bg-gray-100 px-4 py-1.5 rounded-full text-sm">
+                Every 10 days
+              </p>
+            </div>
+            <p class="status text-sm text-gray-500" data-field="status">
+              💚 Thriving – trailing 1m
+            </p>
+            <p class="notes text-gray-700">
+              New leaf every week, fenestration starting
+            </p>
+            <div class="flex gap-3 pt-1">
+              <button
+                class="thriving-btn bg-green-100 hover:bg-green-200 text-green-800 px-5 py-2 rounded-lg text-sm"
+              >
+                Thrive
+              </button>
+              <button
+                class="struggling-btn bg-red-100 hover:bg-red-200 text-red-800 px-5 py-2 rounded-lg text-sm"
+              >
+                Struggle
+              </button>
+            </div>
+          </div>
+          <div>
+            <button
+              class="delete-btn bg-red-100 text-red-700 hover:bg-red-200 px-5 py-2 rounded-lg text-sm"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+
+        <!-- card 05 – Aloe Vera (neutral) -->
+        <div
+          class="card flex justify-between items-start border border-gray-200 p-6 rounded-2xl bg-white shadow-sm"
+          data-status="neutral"
+        >
+          <div class="space-y-3">
+            <div>
+              <p class="plant-name text-3xl font-semibold text-gray-800">
+                Aloe Vera
+              </p>
+              <p class="latin-name text-gray-500 italic">Aloe barbadensis</p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <p class="light bg-gray-100 px-4 py-1.5 rounded-full text-sm">
+                Direct sun
+              </p>
+              <p class="water bg-gray-100 px-4 py-1.5 rounded-full text-sm">
+                Every 2-3 weeks
+              </p>
+            </div>
+            <p class="status text-sm text-gray-500" data-field="status">
+              😐 Not applicable
+            </p>
+            <p class="notes text-gray-700">Firm leaves, no change</p>
+            <div class="flex gap-3 pt-1">
+              <button
+                class="thriving-btn bg-green-100 hover:bg-green-200 text-green-800 px-5 py-2 rounded-lg text-sm"
+              >
+                Thrive
+              </button>
+              <button
+                class="struggling-btn bg-red-100 hover:bg-red-200 text-red-800 px-5 py-2 rounded-lg text-sm"
+              >
+                Struggle
+              </button>
+            </div>
+          </div>
+          <div>
+            <button
+              class="delete-btn bg-red-100 text-red-700 hover:bg-red-200 px-5 py-2 rounded-lg text-sm"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+
+        <!-- card 06 – ZZ plant (thriving) -->
+        <div
+          class="card flex justify-between items-start border border-gray-200 p-6 rounded-2xl bg-white shadow-sm"
+          data-status="thriving"
+        >
+          <div class="space-y-3">
+            <div>
+              <p class="plant-name text-3xl font-semibold text-gray-800">
+                ZZ plant
+              </p>
+              <p class="latin-name text-gray-500 italic">
+                Zamioculcas zamiifolia
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <p class="light bg-gray-100 px-4 py-1.5 rounded-full text-sm">
+                Low light
+              </p>
+              <p class="water bg-gray-100 px-4 py-1.5 rounded-full text-sm">
+                Monthly
+              </p>
+            </div>
+            <p class="status text-sm text-gray-500" data-field="status">
+              💚 Thriving – new stem
+            </p>
+            <p class="notes text-gray-700">Shiny new growth unfurling</p>
+            <div class="flex gap-3 pt-1">
+              <button
+                class="thriving-btn bg-green-100 hover:bg-green-200 text-green-800 px-5 py-2 rounded-lg text-sm"
+              >
+                Thrive
+              </button>
+              <button
+                class="struggling-btn bg-red-100 hover:bg-red-200 text-red-800 px-5 py-2 rounded-lg text-sm"
+              >
+                Struggle
+              </button>
+            </div>
+          </div>
+          <div>
+            <button
+              class="delete-btn bg-red-100 text-red-700 hover:bg-red-200 px-5 py-2 rounded-lg text-sm"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+
+        <!-- card 07 – Calathea (struggling) -->
+        <div
+          class="card flex justify-between items-start border border-gray-200 p-6 rounded-2xl bg-white shadow-sm"
+          data-status="struggling"
+        >
+          <div class="space-y-3">
+            <div>
+              <p class="plant-name text-3xl font-semibold text-gray-800">
+                Calathea orbifolia
+              </p>
+              <p class="latin-name text-gray-500 italic">
+                Goeppertia orbifolia
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <p class="light bg-gray-100 px-4 py-1.5 rounded-full text-sm">
+                Medium indirect
+              </p>
+              <p class="water bg-gray-100 px-4 py-1.5 rounded-full text-sm">
+                Twice a week
+              </p>
+            </div>
+            <p class="status text-sm text-gray-500" data-field="status">
+              🍂 Struggling – crispy edges
+            </p>
+            <p class="notes text-gray-700">Brown tips, needs humidity</p>
+            <div class="flex gap-3 pt-1">
+              <button
+                class="thriving-btn bg-green-100 hover:bg-green-200 text-green-800 px-5 py-2 rounded-lg text-sm"
+              >
+                Thrive
+              </button>
+              <button
+                class="struggling-btn bg-red-100 hover:bg-red-200 text-red-800 px-5 py-2 rounded-lg text-sm"
+              >
+                Struggle
+              </button>
+            </div>
+          </div>
+          <div>
+            <button
+              class="delete-btn bg-red-100 text-red-700 hover:bg-red-200 px-5 py-2 rounded-lg text-sm"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+
+        <!-- card 08 – Peperomia (neutral) -->
+        <div
+          class="card flex justify-between items-start border border-gray-200 p-6 rounded-2xl bg-white shadow-sm"
+          data-status="neutral"
+        >
+          <div class="space-y-3">
+            <div>
+              <p class="plant-name text-3xl font-semibold text-gray-800">
+                Peperomia obtusifolia
+              </p>
+              <p class="latin-name text-gray-500 italic">
+                Peperomia obtusifolia
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <p class="light bg-gray-100 px-4 py-1.5 rounded-full text-sm">
+                Bright indirect
+              </p>
+              <p class="water bg-gray-100 px-4 py-1.5 rounded-full text-sm">
+                Every 10 days
+              </p>
+            </div>
+            <p class="status text-sm text-gray-500" data-field="status">
+              😐 Not applicable
+            </p>
+            <p class="notes text-gray-700">Leaves firm, no change</p>
+            <div class="flex gap-3 pt-1">
+              <button
+                class="thriving-btn bg-green-100 hover:bg-green-200 text-green-800 px-5 py-2 rounded-lg text-sm"
+              >
+                Thrive
+              </button>
+              <button
+                class="struggling-btn bg-red-100 hover:bg-red-200 text-red-800 px-5 py-2 rounded-lg text-sm"
+              >
+                Struggle
+              </button>
+            </div>
+          </div>
+          <div>
+            <button
+              class="delete-btn bg-red-100 text-red-700 hover:bg-red-200 px-5 py-2 rounded-lg text-sm"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
 </html>
